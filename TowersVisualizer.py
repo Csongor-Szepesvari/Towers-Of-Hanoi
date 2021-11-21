@@ -31,7 +31,7 @@ def towerVisualizer(tower, size):
                 if amount%2==0:
                     #when even it will be on 2 sides of the middle
                     #will be filled from [half-amount//2:half-1] and the other side
-                    if j in range(width//2-amount//2+1, width//2) or j in range(width//2+1, width//2+amount//2):
+                    if j in range(width//2-amount//2, width//2) or j in range(width//2+1, width//2+amount//2+1):
                         out+="-"
                     elif j==width//2:
                         out+="|"
@@ -39,17 +39,37 @@ def towerVisualizer(tower, size):
                         out+=" "
                 else:
                     #it will be going through the middle
-                    if j in range(width//2-amount//2+1, width//2+amount//2):
+                    if j in range(width//2-amount//2, width//2+amount//2+1):
                         out+="-"
                     else:
                         out+=" "
                 
         stringLevels.append(out)
-    for i in range(len(stringLevels)):
-        print(stringLevels[i])
+    #for i in range(len(stringLevels)):
+    #    print(stringLevels[i])
+    return stringLevels
         
 # part 2: Add each one together
+def visualizeAll(size, a, b, c):
+    left = towerVisualizer(a, size)
+    middle = towerVisualizer(b, size)
+    right = towerVisualizer(c, size)
+    final = []
+    for i in range(len(left)):
+        final.append(left[i]+middle[i]+right[i])
+    #for i in range(len(final)):
+    #    print(final[i])
+    return final
 
-
-# The visualizer of a tower
+def printTower(size, tower):
+    returned = towerVisualizer(tower, size)
+    for i in range(len(returned)):
+        print(returned[i])
+    print()
+        
+def printTowers(size, a, b, c):
+    returned = visualizeAll(size, a, b, c)
+    for i in range(len(returned)):
+        print(returned[i])
+    print()
 
